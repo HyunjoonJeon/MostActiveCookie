@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
@@ -46,7 +47,23 @@ bool extractCookies(string fileName, vector<string> &cookies, string date) {
 
 void mostActiveCookies(vector<string> &cookies) {
     if(cookies.empty()) {
-        
+        return;
+    }
+    unordered_map<string,unsigned int> table;
+    unsigned int maxFrequency = 1;
+    for(int i = 0; i < cookies.size(); i++) {
+        if(table.find(cookies[i]) == table.end()) { // cookie occured for the first time
+            table[cookies[i]] = 1;
+        } else {
+            unsigned int count = table[cookies[i]] + 1;
+            table[cookies[i]] = count;
+            if(maxFrequency < count) maxFrequency = count;
+        }
+    }
+    for(auto itr = table.begin(); itr != table.end(); itr++) {
+        if(itr->second == maxFrequency) {
+            cout << itr->first << endl;
+        }
     }
 }
 
@@ -61,17 +78,12 @@ int main(int argc, char **argv) {
     vector<string> cookies;
 
     extractCookies(argv[1], cookies, argv[3]);
-
-    for(int i = 0; i < cookies.size(); i++) {
-        cout << cookies[i] << endl;
-    }
-    
+    mostActiveCookies(cookies);
 
     // argv[0] = ./most_active_cookie
     // argv[1] = cookie_log.csv
     // argv[2] = -d
     // argv[3] = 2018-12-09
-
 
     return 0;
 }
