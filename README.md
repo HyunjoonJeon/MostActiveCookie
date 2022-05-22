@@ -3,7 +3,8 @@
 ## Introduction
 The task is to develop a program that finds the most active cookie in a given cookie log file in the following format:
 
->cookie,timestamp
+```
+cookie,timestamp
 AtY0laUfhglK3lC7,2018-12-09T14:19:00+00:00
 SAZuXPGUrfbcn5UA,2018-12-09T10:13:00+00:00
 5UAVanZf6UtGyKVS,2018-12-09T07:25:00+00:00
@@ -12,6 +13,7 @@ SAZuXPGUrfbcn5UA,2018-12-08T22:03:00+00:00
 4sMM2LxV07bPJzwf,2018-12-08T21:30:00+00:00
 fbcn5UAVanZf6UtG,2018-12-08T09:30:00+00:00
 4sMM2LxV07bPJzwf,2018-12-07T23:30:00+00:00
+```
 
 The most active cookie is defined as the most seen cookie during a given day. So
 in the above example, the most active cookie for 2018-12-09 would be `AtY0laUfhglK3lC7`. There can be multiple most active cookies during the given day as 2018-12-08 in the above example where `SAZuXPGUrfbcn5UA`, `4sMM2LxV07bPJzwf`, and `fbcn5UAVanZf6UtG` are the most active cookies.
