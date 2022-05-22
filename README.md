@@ -44,6 +44,7 @@ A bash script was written to automate the testing process. The script can be run
 The directory `Program_tests` contain both manually written testcases and automatically generated testcases. Each testcase contains cookies with dates among `2022-05-21`, `2022-05-20`, `2022-05-19`, `2022-05-18`, and `2022-05-17`. The program is tested using the testcases with each of the available dates. Then the output was checked by the answers in the `Answers` sub-folder in both `ManualTest` and `AutomatedTest`.
 
 ### Manual testcases
+
 There are 4 manual testcases in the directory. However, a user can add a custom testcase by simply adding a log file in Program_tests/ManualTest/Testcases and the correct output in `Program_tests/ManualTest/Answers`.
 
 1. manual_log_1.csv
@@ -56,4 +57,9 @@ There are 4 manual testcases in the directory. However, a user can add a custom 
     - A cookie log that contains one million cookies. 
 
 ### Randomly generated testcases
+
 The bash script `most_active_cookie_test.sh` creates various testcases using the program `generate_testcases.cpp`. The program can generate a given number of random cookies with a specified distinct number of cookies. In the bash script, the distinct number of cookies is set to be `8` and the number of cookies in each testcase is varied among `100`, `1000`, `10000`, `100000`, and `1000000`. While the testcases are generated, the correct outputs are also calculated to check the accuracy of the `most_active_cookie` program. When the bash script is executed, a message indicating the number of testcases passed out of the total number will be printed in the terminal.
+
+## Platform
+
+The program was developed in mac OS. 

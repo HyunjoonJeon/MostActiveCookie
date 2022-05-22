@@ -50,8 +50,11 @@ done
 TestcasesCount=(100 1000 10000 100000 1000000)
 cookiesCount=8
 
-rm Program_tests/AutomatedTest/Testcases/*
-rm Program_tests/AutomatedTest/Answers/*
+mkdir -p Program_tests/AutomatedTest/Testcases
+mkdir -p Program_tests/AutomatedTest/Answers
+
+rm -f Program_tests/AutomatedTest/Testcases/*
+rm -f Program_tests/AutomatedTest/Answers/*
 
 for count in "${TestcasesCount[@]}"; do
     ./generate_testcases ${cookiesCount} ${count} automated_log_${count}
