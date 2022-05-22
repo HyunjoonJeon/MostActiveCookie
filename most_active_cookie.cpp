@@ -6,7 +6,7 @@
 
 using namespace std;
 
-// returns false if date1 is earlier
+// date1 < date2 -> -1, date1 == date2 -> 0, date1 > date2 -> 1
 int8_t compareDates(string date1, string date2) {
     int year1, month1, day1;
     int year2, month2, day2;
@@ -45,6 +45,7 @@ bool extractCookies(string fileName, vector<string> &cookies, string date) {
     return false;
 }
 
+// finds the most active cookies
 void mostActiveCookies(vector<string> &cookies) {
     if(cookies.empty()) {
         return;
@@ -79,11 +80,6 @@ int main(int argc, char **argv) {
 
     extractCookies(argv[1], cookies, argv[3]);
     mostActiveCookies(cookies);
-
-    // argv[0] = ./most_active_cookie
-    // argv[1] = cookie_log.csv
-    // argv[2] = -d
-    // argv[3] = 2018-12-09
 
     return 0;
 }
