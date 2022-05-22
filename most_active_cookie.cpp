@@ -21,6 +21,42 @@ int8_t compareDates(string date1, string date2) {
     }
 }
 
+// extract and find most active cookie simultaneously
+void extractAndFind(string fileName, vector<string> &cookies, string date) {
+    string line;
+    fstream file (fileName, ios::in);
+    if(file.is_open()) {
+        unordered_map<string,unsigned int> table;
+        unsigned int maxFrequency = 1;
+        getline(file, line); // ignore the first line: cookie,timestamp
+        while(getline(file, line)) {
+            int splitPos = line.find(',');
+            string cookie = line.substr(0, splitPos);
+            string cookieDateAndTime = line.substr(splitPos + 1);
+            string cookieDate = cookieDateAndTime.substr(0, cookieDateAndTime.find('T'));
+            int8_t compare = compareDates(cookieDate, date);
+            if(compare == -1) {
+                break;
+            } else if(compare == 0){
+                if(table.find(cookie) == table.end()) { // cookie occured for the first time
+                    table[cookie] = 1;
+                } else {
+                    unsigned int count = table[cookie] + 1;
+                    table[cookie] = count;
+                    if(maxFrequency < count) maxFrequency = count;
+                }
+            }
+        }
+        for(auto itr = table.begin(); itr != table.end(); itr++) {
+            if(itr->second == maxFrequency) {
+                cout << itr->first << endl;
+            }
+        }
+    } else {
+        cout << "Error: Could not open the file. Please check the file name." << endl;
+    }
+}
+
 // extract cookies in the given date
 bool extractCookies(string fileName, vector<string> &cookies, string date) {
     string line;
@@ -78,8 +114,13 @@ int main(int argc, char **argv) {
 
     vector<string> cookies;
 
+    /* initial version of the program
     extractCookies(argv[1], cookies, argv[3]);
     mostActiveCookies(cookies);
+    */
+
+    // using the new function
+    extractAndFind(argv[1], cookies, argv[3]);
 
     return 0;
 }
