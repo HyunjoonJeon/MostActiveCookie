@@ -41,9 +41,7 @@ void randomCookie(int nOfCookies, int nOfTestcases, string fileName) {
     }
     // create a cookies log and answer file
     ofstream logFile;
-    logFile.open(fileName+".csv");
-    ofstream answerFile;
-    answerFile.open(fileName+"_answer.txt");
+    logFile.open("Program_tests/AutomatedTest/Testcases/"+fileName+".csv");
 
     // generate n number of testcases and count frequencies of the cookies for answer
     logFile << "cookie,timestamp" << endl;
@@ -58,13 +56,18 @@ void randomCookie(int nOfCookies, int nOfTestcases, string fileName) {
     }
 
     // find most active cookies for each date
+    ofstream answerFile;
     for(int i = 0; i < 5; i++) {
-        answerFile << dates[i] << " " << cookies[(max_element(frequencies.begin()+i*nOfCookies, frequencies.begin()+(i+1)*nOfCookies) - frequencies.begin()) % nOfCookies] << endl;
+        answerFile.open("Program_tests/AutomatedTest/Answers/"+fileName+"_answer-"+dates[i]+".txt");
+        int maxFrequency = *max_element(frequencies.begin()+i*nOfCookies, frequencies.begin()+(i+1)*nOfCookies);
+        for(int j = 0; j < nOfCookies; j++) {
+            if(frequencies[j + i*nOfCookies] == maxFrequency) {
+                answerFile << cookies[j] << endl;
+            }
+        }
+        answerFile.close();
     }
-
-    // close the files
     logFile.close();
-    answerFile.close();
 }
 
 int main(int argc, char **argv) {
